@@ -1,15 +1,39 @@
 {
     "name":"prng-parkmiller-js",
-    "keywords":[ "random", "number", "generator", "park-miller" ],
-    "version":"0.0.1",
+    "description":"Park-Miller-Carta pseudo-random number generator library",
+    "keywords":[ "random", "number", "generator", "park-miller", "prng" ],
+    "homepage": "https://github.com/odogono/prng-parkmiller-js/",
+    "version":"0.1.0",
     "author": "Alexander Veenendaal <alex@opendoorgonorth.com> (http://github.com/odogono/)",
     "contributors": [
         "Alexander Veenendaal <alex@opendoorgonorth.com> (http://github.com/odogono/)",
         "Michael Baczynski <michael@polygonal.de> (http://github.com/polygonal/) "
     ],
 
-    "main": "./pm_prng",
+    "bugs": {
+        "mail": "alex@opendoorgonorth.com",
+        "url": "https://github.com/odogono/prng-parkmiller-js/issues"
+    },
+
+    "directories": {
+        "example":"./examples",
+        "test": "./test"
+    },
+
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://raw.github.com/odogono/prng-parkmiller-js/master/LICENSE"
+        }
+    ],
+
+    "main": "pm_prng.js",
     
+    "repository": {
+        "type": "git",
+        "url": "https://github.com:odogono/prng-parkmiller-js.git"
+    },
+
     "devDependencies":{
         "mocha":">= 1.0.2"
     },
