@@ -3,7 +3,7 @@
     "description":"Park-Miller-Carta pseudo-random number generator library",
     "keywords":[ "random", "number", "generator", "park-miller", "prng" ],
     "homepage": "https://github.com/odogono/prng-parkmiller-js/",
-    "version":"0.1.0",
+    "version":"0.1.1",
     "author": "Alexander Veenendaal <alex@opendoorgonorth.com> (http://github.com/odogono/)",
     "contributors": [
         "Alexander Veenendaal <alex@opendoorgonorth.com> (http://github.com/odogono/)",
