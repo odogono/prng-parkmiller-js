@@ -1,0 +1,19 @@
+{
+    "name":"prng-parkmiller-js",
+    "keywords":[ "random", "number", "generator", "park-miller" ],
+    "version":"0.0.1",
+    "author": "Alexander Veenendaal <alex@opendoorgonorth.com> (http://github.com/odogono/)",
+    "contributors": [
+        "Alexander Veenendaal <alex@opendoorgonorth.com> (http://github.com/odogono/)",
+        "Michael Baczynski <michael@polygonal.de> (http://github.com/polygonal/) "
+    ],
+
+    "main": "./pm_prng",
+    
+    "devDependencies":{
+        "mocha":">= 1.0.2"
+    },
+    "scripts": {
+        "test": "node_modules/.bin/mocha test/test.pm_prng.js"
+    }
+}

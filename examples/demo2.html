@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Park Miller Pseudo Random Number Generation - Demo 2 - Random Squiggles</title>
+        <style type="text/css">
+            body {
+              margin: 0;
+              font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+              font-size: 13px;
+              line-height: 18px;
+              color: #333333;
+              background-color: #ffffff;
+            }
+            #canvas{ 
+                width: 500px; height:500px; background-color: #333;
+            }
+            .instr { float: left; }
+            .seedEntry{ float: left; margin-left: 10em; }
+        </style>
+    </head>
+    <body>
+        <canvas id="canvas" width="500px" height="500px">
+        </canvas>
+        <div>
+            <div class="instr">Click for a random squiggle</div>
+            <div class="seedEntry">Seed #<input id="seed" type="text" /></div>
+        </div>
+        <br style="clear:both;" />
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="jquery-1.7.2.min.js"><\/script>')</script>
+        <script src="../pm_prng.js"></script>
+        <script src="colour_value.js"></script>
+        <script src="random_squiggle.js"></script>
+        <script src="request_animation_frame.js"></script>
+        <script type="text/javascript">
+
+            var $canvas = $('#canvas');
+            var $seedField = $('#seed');
+            var random = PM_PRNG.create();
+            var squiggle = RandomSquiggle.create( $canvas.get(0), random );
+
+            // clears the canvas and takes the seed either from the input field or from the generator
+            var resetSquiggle = function(takeFromField){
+                var seed = takeFromField ? parseInt( $seedField.val() ) : random.nextInt();
+                squiggle.generate( seed );
+                $seedField.val(seed);
+            };
+
+
+            // main loop - requests next frame and draws
+            var animate = function(){
+                requestAnimationFrame( animate );
+                squiggle.draw();
+            };
+
+            // when the canvas is clicked, reset with a new random seed
+            $canvas.on('click', function(){
+                resetSquiggle();
+            });
+
+            // when the user enters a new seed, reset
+            $seedField.on('change', function(){
+                resetSquiggle( true );
+            }).keypress( function(e){
+                if( e.which === 13 ){
+                    resetSquiggle( true );
+                }
+            });
+
+            // clear canvas and choose initial seed
+            resetSquiggle();
+
+            // begin animation loop
+            animate();
+        </script>
+
+    </body>
+</html>

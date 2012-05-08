@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Park Miller Pseudo Random Number Generation - Demo 1 - Random Dots</title>
+        <style type="text/css">
+            body {
+              margin: 0;
+              font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+              font-size: 13px;
+              line-height: 18px;
+              color: #333333;
+              background-color: #ffffff;
+            }
+            #canvas{ 
+                width: 500px; height:500px; background-color: #333;
+            }
+            .instr { float: left; }
+            .seedEntry{ float: left; margin-left: 10em; }
+        </style>
+    </head>
+    <body>
+        <canvas id="canvas" width="500px" height="500px">
+        </canvas>
+        <div>
+            <div class="instr">Click to change seed</div>
+            <div class="seedEntry">Seed #<input id="seed" type="text" /></div>
+        </div>
+        <br style="clear:both;" />
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="jquery-1.7.2.min.js"><\/script>')</script>
+        <script src="../pm_prng.js"></script>
+        <script src="colour_value.js"></script>
+        <script src="request_animation_frame.js"></script>
+        <script type="text/javascript">
+
+            var $canvas = $('#canvas');
+            var $seedField = $('#seed');
+            var width = $canvas.width();
+            var height = $canvas.height();
+            var context = $canvas.get(0).getContext('2d');
+            var random = PM_PRNG.create();
+
+            // clears the canvas and takes the seed either from the input field or from the generator
+            var resetCanvas = function(takeFromField){
+                var seed = takeFromField ? parseInt( $seedField.val() ) : random.nextInt();
+                random.seed = seed;
+                $seedField.val(seed);
+                context.fillStyle = '#000000';
+                context.fillRect( 0,0,width,height );
+            };
+
+            // draws a single pixel of random colour and position to the canvas
+            var draw = function(){
+                var colour = ColourValue.create( 
+                    random.nextIntRange(0,255),
+                    random.nextIntRange(0,255),
+                    random.nextIntRange(0,255) );
+
+                context.fillStyle = colour.toString();
+                var x = random.nextIntRange( 0, width-1 );
+                var y = random.nextIntRange( 0, height-1 );
+                context.fillRect(  x, y, 2, 2 );
+            };
+
+            // main loop - requests next frame and draws
+            var animate = function(){
+                requestAnimationFrame( animate );
+                draw();
+            };
+
+            // when the canvas is clicked, reset with a new random seed
+            $canvas.on('click', function(){
+                resetCanvas();
+            });
+
+            // when the user enters a new seed, reset
+            $seedField.on('change', function(){
+                resetCanvas( true );
+            }).keypress( function(e){
+                if( e.which === 13 ){
+                    resetCanvas( true );
+                }
+            });
+
+            // clear canvas and choose initial seed
+            resetCanvas();
+            // begin animation loop
+            animate();
+
+        </script>
+
+    </body>
+</html>
